@@ -1,0 +1,20 @@
+version: '3'
+
+networks:
+  nginxproxy:
+    external: true
+
+services:
+
+  epic7-short-url:
+    image: epic7-short-url
+    container_name: epic7-short-url
+    environment:
+      - VIRTUAL_HOST=${HOST}
+      - LETSENCRYPT_HOST=${HOST}
+      - LETSENCRYPT_EMAIL=${EMAIL}
+    restart: always
+    logging:
+      driver: gcplogs
+    networks:
+      - nginxproxy
